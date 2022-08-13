@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlayerTestState : PlayerBaseState
 {
 
-
     public PlayerTestState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
     public override void Enter()
@@ -22,8 +21,17 @@ public class PlayerTestState : PlayerBaseState
         movement.x = stateMachine.InputReader.MovementValue.x;
         movement.y = 0f;
         movement.z = stateMachine.InputReader.MovementValue.y;
-        stateMachine.transform.Translate(movement * deltaTime);
-        Debug.Log(stateMachine.InputReader.MovementValue);
+        stateMachine.Controller.Move(movement * deltaTime * stateMachine.FreeLookMovementSpeed);
+
+        if (stateMachine.InputReader.MovementValue == Vector2.zero)
+        {
+            stateMachine.Animator.SetFloat("FreeLookSpeed", 0, 0.1f, deltaTime);
+            return;
+        }
+
+        stateMachine.Animator.SetFloat("FreeLookSpeed", 1, 0.1f, deltaTime);
+
+        stateMachine.transform.rotation = Quaternion.LookRotation(movement);
     }
 
 
