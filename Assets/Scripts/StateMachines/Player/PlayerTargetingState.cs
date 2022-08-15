@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class PlayerTargetingState : PlayerBaseState
 {
     public PlayerTargetingState(PlayerStateMachine stateMachine) : base(stateMachine)
@@ -11,10 +13,13 @@ public class PlayerTargetingState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
+        Debug.Log(stateMachine.Targeter.CurrentTarget);
     }
 
     public override void Exit()
     {
+        stateMachine.Targeter.Cancel();
+
         stateMachine.InputReader.CancelEvent += OnCancel;
     }
 

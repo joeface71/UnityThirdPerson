@@ -22,7 +22,11 @@ public class PlayerFreeLookState : PlayerBaseState
 
     private void OnTarget()
     {
+        if (!stateMachine.Targeter.SelectTarget()) return;
+
         stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
+
+
     }
 
     public override void Tick(float deltaTime)
