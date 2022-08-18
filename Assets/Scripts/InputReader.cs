@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class InputReader : MonoBehaviour, Controls.IPlayerActions
 {
+    public bool IsAttacking { get; private set; }
+
     public Vector2 MovementValue { get; private set; }
 
     public event Action JumpEvent;
@@ -60,5 +62,20 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     {
         if (!context.performed) return;
         CancelEvent?.Invoke();
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        // using bool with performed and cancelled allows attack to continue while button is pressed
+        if (context.performed)
+        {
+            IsAttacking = true;
+        }
+        else if (context.canceled)
+        {
+            IsAttacking = false;
+        }
+
+
     }
 }
