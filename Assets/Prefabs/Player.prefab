@@ -1498,6 +1498,10 @@ MonoBehaviour:
   <ForceReceiver>k__BackingField: {fileID: 4134475494060105349}
   <Animator>k__BackingField: {fileID: 6616306930378284351}
   <Targeter>k__BackingField: {fileID: 7068299150579438037}
+  <Attacks>k__BackingField:
+  - <AnimationName>k__BackingField: Attack1
+  - <AnimationName>k__BackingField: Attack2
+  - <AnimationName>k__BackingField: Attack3
 --- !u!114 &6023562917709026486
 MonoBehaviour:
   m_ObjectHideFlags: 0
