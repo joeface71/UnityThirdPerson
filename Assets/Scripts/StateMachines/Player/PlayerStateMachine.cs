@@ -26,7 +26,11 @@ public class PlayerStateMachine : StateMachine
     public Targeter Targeter { get; private set; }
 
     [field: SerializeField]
+    public WeaponDamage Weapon { get; private set; }
+
+    [field: SerializeField]
     public Attack[] Attacks { get; private set; }
+
 
 
 
