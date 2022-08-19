@@ -7,7 +7,6 @@ public class Targeter : MonoBehaviour
     [SerializeField] private CinemachineTargetGroup cineTargetGroup;
 
     private Camera mainCamera;
-
     private List<Target> targets = new List<Target>();
 
     public Target CurrentTarget { get; private set; }
@@ -19,27 +18,22 @@ public class Targeter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<Target>(out Target target))
-        {
-            targets.Add(target);
-            target.OnDestroyed += RemoveTarget;
-        }
+        if (!other.TryGetComponent<Target>(out Target target)) { return; }
+
+        targets.Add(target);
+        target.OnDestroyed += RemoveTarget;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent<Target>(out Target target))
-        {
-            RemoveTarget(target);
-        }
+        if (!other.TryGetComponent<Target>(out Target target)) { return; }
+
+        RemoveTarget(target);
     }
 
     public bool SelectTarget()
     {
-        if (targets.Count == 0)
-        {
-            return false;
-        }
+        if (targets.Count == 0) { return false; }
 
         Target closestTarget = null;
         float closestTargetDistance = Mathf.Infinity;
@@ -47,13 +41,13 @@ public class Targeter : MonoBehaviour
         foreach (Target target in targets)
         {
             Vector2 viewPos = mainCamera.WorldToViewportPoint(target.transform.position);
-            if (viewPos.x > 1f || viewPos.x < 0f || viewPos.y > 1f || viewPos.y < 0f)
+
+            if (viewPos.x < 0 || viewPos.x > 1 || viewPos.y < 0 || viewPos.y > 1)
             {
                 continue;
             }
 
             Vector2 toCenter = viewPos - new Vector2(0.5f, 0.5f);
-
             if (toCenter.sqrMagnitude < closestTargetDistance)
             {
                 closestTarget = target;
@@ -61,23 +55,17 @@ public class Targeter : MonoBehaviour
             }
         }
 
-        if (closestTarget == null)
-        {
-            return false;
-        }
-
+        if (closestTarget == null) { return false; }
 
         CurrentTarget = closestTarget;
         cineTargetGroup.AddMember(CurrentTarget.transform, 1f, 2f);
+
         return true;
     }
 
     public void Cancel()
     {
-        if (CurrentTarget == null)
-        {
-            return;
-        }
+        if (CurrentTarget == null) { return; }
 
         cineTargetGroup.RemoveMember(CurrentTarget.transform);
         CurrentTarget = null;
@@ -94,6 +82,4 @@ public class Targeter : MonoBehaviour
         target.OnDestroyed -= RemoveTarget;
         targets.Remove(target);
     }
-
-
 }

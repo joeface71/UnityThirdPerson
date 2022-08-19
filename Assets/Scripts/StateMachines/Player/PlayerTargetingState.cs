@@ -6,7 +6,6 @@ public class PlayerTargetingState : PlayerBaseState
     private readonly int TargetingForwardHash = Animator.StringToHash("TargetingForward");
     private readonly int TargetingRightHash = Animator.StringToHash("TargetingRight");
 
-
     public PlayerTargetingState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
     }
@@ -42,13 +41,13 @@ public class PlayerTargetingState : PlayerBaseState
 
     public override void Exit()
     {
-        stateMachine.Targeter.Cancel();
-
         stateMachine.InputReader.CancelEvent += OnCancel;
     }
 
     private void OnCancel()
     {
+        stateMachine.Targeter.Cancel();
+
         stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
     }
 
@@ -85,7 +84,4 @@ public class PlayerTargetingState : PlayerBaseState
             stateMachine.Animator.SetFloat(TargetingRightHash, value, 0.1f, deltaTime);
         }
     }
-
-
-
 }
