@@ -16,6 +16,12 @@ public class EnemyStateMachine : StateMachine
     public NavMeshAgent Agent { get; private set; }
 
     [field: SerializeField]
+    public WeaponDamage Weapon { get; private set; }
+
+    [field: SerializeField]
+    public int AttackDamage { get; private set; }
+
+    [field: SerializeField]
     public float MovementSpeed { get; private set; }
 
     [field: SerializeField]
