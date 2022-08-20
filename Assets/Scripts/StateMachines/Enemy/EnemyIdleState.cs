@@ -23,13 +23,16 @@ public class EnemyIdleState : EnemyBaseState
 
         if (IsInChaseRange())
         {
-            stateMachine.SwitchState(new EnemyChaseState(stateMachine));
+            stateMachine.SwitchState(new EnemyChasingState(stateMachine));
             return;
         }
+
+        FacePlayer();
 
         stateMachine.Animator.SetFloat(SpeedHash, 0f, AnimatorDampTime, deltaTime);
     }
 
     public override void Exit()
-    { }
+    {
+    }
 }
