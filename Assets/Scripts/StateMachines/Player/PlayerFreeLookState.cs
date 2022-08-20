@@ -8,28 +8,14 @@ public class PlayerFreeLookState : PlayerBaseState
     private const float AnimatorDampTime = 0.1f;
     private const float CrossFadeDuration = 0.1f;
 
-    public PlayerFreeLookState(PlayerStateMachine stateMachine) : base(stateMachine) { }
+    public PlayerFreeLookState(PlayerStateMachine stateMachine) : base(stateMachine)
+    {
+    }
 
     public override void Enter()
     {
         stateMachine.InputReader.TargetEvent += OnTarget;
         stateMachine.Animator.CrossFadeInFixedTime(FreeLookBlendTreeHash, CrossFadeDuration);
-    }
-
-
-
-    public override void Exit()
-    {
-        stateMachine.InputReader.TargetEvent -= OnTarget;
-    }
-
-    private void OnTarget()
-    {
-        if (!stateMachine.Targeter.SelectTarget()) return;
-
-        stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
-
-
     }
 
     public override void Tick(float deltaTime)
@@ -54,6 +40,18 @@ public class PlayerFreeLookState : PlayerBaseState
         FaceMovementDirection(movement, deltaTime);
     }
 
+    public override void Exit()
+    {
+        stateMachine.InputReader.TargetEvent -= OnTarget;
+    }
+
+    private void OnTarget()
+    {
+        if (!stateMachine.Targeter.SelectTarget()) return;
+
+        stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
+    }
+
     private Vector3 CalculateMovement()
     {
         Vector3 forward = stateMachine.MainCameraTransform.forward;
@@ -66,7 +64,6 @@ public class PlayerFreeLookState : PlayerBaseState
         right.Normalize();
 
         return forward * stateMachine.InputReader.MovementValue.y + right * stateMachine.InputReader.MovementValue.x;
-
     }
 
     private void FaceMovementDirection(Vector3 movement, float deltaTime)
@@ -76,7 +73,4 @@ public class PlayerFreeLookState : PlayerBaseState
             Quaternion.LookRotation(movement),
             deltaTime * stateMachine.RotationDamping);
     }
-
-
-
 }
