@@ -19,6 +19,9 @@ public class EnemyStateMachine : StateMachine
     public WeaponDamage Weapon { get; private set; }
 
     [field: SerializeField]
+    public Target Target { get; private set; }
+
+    [field: SerializeField]
     public Health Health { get; private set; }
 
     [field: SerializeField]
@@ -41,11 +44,14 @@ public class EnemyStateMachine : StateMachine
     private void OnEnable()
     {
         Health.OnTakeDamage += HandleTakeDamage;
+        Health.OnDie += HandleDie;
     }
 
     private void OnDisable()
     {
         Health.OnTakeDamage -= HandleTakeDamage;
+        Health.OnDie -= HandleDie;
+
     }
 
     private void Start()
@@ -67,5 +73,10 @@ public class EnemyStateMachine : StateMachine
     private void HandleTakeDamage()
     {
         SwitchState(new EnemyImpactState(this));
+    }
+
+    private void HandleDie()
+    {
+        SwitchState(new EnemyDeadState(this));
     }
 }

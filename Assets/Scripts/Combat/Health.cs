@@ -5,6 +5,8 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 100;
     public event Action OnTakeDamage;
+    public event Action OnDie;
+
 
     private int health;
 
@@ -23,6 +25,11 @@ public class Health : MonoBehaviour
         health = Mathf.Max(health - damage, 0);
 
         OnTakeDamage?.Invoke();
+
+        if (health == 0)
+        {
+            OnDie?.Invoke();
+        }
 
         Debug.Log(damage);
     }
