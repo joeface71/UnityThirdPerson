@@ -1502,7 +1502,7 @@ MonoBehaviour:
   <Animator>k__BackingField: {fileID: 6616306930378284351}
   <Targeter>k__BackingField: {fileID: 7068299150579438037}
   <Weapon>k__BackingField: {fileID: 6180130588441946538}
-  <AttackKnockback>k__BackingField: 0
+  <Health>k__BackingField: {fileID: 5421250816033352125}
   <Attacks>k__BackingField:
   - <AnimationName>k__BackingField: Attack1
     <TransistionDuration>k__BackingField: 0.1

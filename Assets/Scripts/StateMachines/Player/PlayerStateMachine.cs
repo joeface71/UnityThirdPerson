@@ -29,6 +29,9 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField]
     public WeaponDamage Weapon { get; private set; }
 
+    [field: SerializeField]
+    public Health Health { get; private set; }
+
     //[field: SerializeField]
     //public float AttackKnockback { get; private set; }
 
@@ -37,10 +40,25 @@ public class PlayerStateMachine : StateMachine
 
     public Transform MainCameraTransform { get; private set; }
 
+    private void OnEnable()
+    {
+        Health.OnTakeDamage += HandleTakeDamage;
+    }
+
+    private void OnDisable()
+    {
+        Health.OnTakeDamage -= HandleTakeDamage;
+    }
+
     private void Start()
     {
         MainCameraTransform = Camera.main.transform;
 
         SwitchState(new PlayerFreeLookState(this));
+    }
+
+    private void HandleTakeDamage()
+    {
+        SwitchState(new PlayerImpactState(this));
     }
 }

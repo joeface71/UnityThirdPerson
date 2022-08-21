@@ -19,6 +19,9 @@ public class EnemyStateMachine : StateMachine
     public WeaponDamage Weapon { get; private set; }
 
     [field: SerializeField]
+    public Health Health { get; private set; }
+
+    [field: SerializeField]
     public int AttackDamage { get; private set; }
 
     [field: SerializeField]
@@ -35,6 +38,16 @@ public class EnemyStateMachine : StateMachine
 
     public GameObject Player { get; private set; }
 
+    private void OnEnable()
+    {
+        Health.OnTakeDamage += HandleTakeDamage;
+    }
+
+    private void OnDisable()
+    {
+        Health.OnTakeDamage -= HandleTakeDamage;
+    }
+
     private void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -49,5 +62,10 @@ public class EnemyStateMachine : StateMachine
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, PlayerChasingRange);
+    }
+
+    private void HandleTakeDamage()
+    {
+        SwitchState(new EnemyImpactState(this));
     }
 }

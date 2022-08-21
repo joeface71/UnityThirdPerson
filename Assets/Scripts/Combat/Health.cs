@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 
 public class Health : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 100;
+    public event Action OnTakeDamage;
 
     private int health;
 
@@ -19,6 +21,8 @@ public class Health : MonoBehaviour
         }
 
         health = Mathf.Max(health - damage, 0);
+
+        OnTakeDamage?.Invoke();
 
         Debug.Log(damage);
     }
