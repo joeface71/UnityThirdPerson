@@ -937,6 +937,7 @@ MonoBehaviour:
   <Agent>k__BackingField: {fileID: 4884866884318559466}
   <Weapon>k__BackingField: {fileID: 6133394635559646658}
   <AttackDamage>k__BackingField: 20
+  <AttackKnockback>k__BackingField: 10
   <MovementSpeed>k__BackingField: 3
   <PlayerChasingRange>k__BackingField: 10
   <AttackRange>k__BackingField: 1.5
@@ -978,6 +979,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 2989819634701879440}
+  agent: {fileID: 4884866884318559466}
   drag: 0.1
 --- !u!114 &1128268300617981509
 MonoBehaviour:

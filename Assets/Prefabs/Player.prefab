@@ -1502,6 +1502,7 @@ MonoBehaviour:
   <Animator>k__BackingField: {fileID: 6616306930378284351}
   <Targeter>k__BackingField: {fileID: 7068299150579438037}
   <Weapon>k__BackingField: {fileID: 6180130588441946538}
+  <AttackKnockback>k__BackingField: 0
   <Attacks>k__BackingField:
   - <AnimationName>k__BackingField: Attack1
     <TransistionDuration>k__BackingField: 0.1
@@ -1509,6 +1510,7 @@ MonoBehaviour:
     <ComboAttackTime>k__BackingField: 0.6
     <ForceTime>k__BackingField: 0.35
     <Force>k__BackingField: 15
+    <Knockback>k__BackingField: 5
     <Damage>k__BackingField: 10
   - <AnimationName>k__BackingField: Attack2
     <TransistionDuration>k__BackingField: 0.1
@@ -1516,6 +1518,7 @@ MonoBehaviour:
     <ComboAttackTime>k__BackingField: 0.5
     <ForceTime>k__BackingField: 0.35
     <Force>k__BackingField: 15
+    <Knockback>k__BackingField: 10
     <Damage>k__BackingField: 15
   - <AnimationName>k__BackingField: Attack3
     <TransistionDuration>k__BackingField: 0.2
@@ -1523,6 +1526,7 @@ MonoBehaviour:
     <ComboAttackTime>k__BackingField: 0
     <ForceTime>k__BackingField: 0.35
     <Force>k__BackingField: 20
+    <Knockback>k__BackingField: 15
     <Damage>k__BackingField: 20
 --- !u!114 &6023562917709026486
 MonoBehaviour:
@@ -1595,6 +1599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1361243223784557747}
+  agent: {fileID: 0}
   drag: 0.1
 --- !u!114 &7248043069554439613
 MonoBehaviour:

@@ -22,6 +22,9 @@ public class EnemyStateMachine : StateMachine
     public int AttackDamage { get; private set; }
 
     [field: SerializeField]
+    public float AttackKnockback { get; private set; }
+
+    [field: SerializeField]
     public float MovementSpeed { get; private set; }
 
     [field: SerializeField]
