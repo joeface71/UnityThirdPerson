@@ -58,8 +58,13 @@ public class EnemyChasingState : EnemyBaseState
 
     private bool IsInAttackRange()
     {
+        if (stateMachine.Player.IsDead)
+        {
+            return false;
+        }
+
         float playerDistanceSqr = (stateMachine.Player.transform.position - stateMachine.transform.position).sqrMagnitude;//squaring is more performant than getting square root
-        Debug.Log(playerDistanceSqr <= stateMachine.AttackRange * stateMachine.AttackRange);
+
         return playerDistanceSqr <= stateMachine.AttackRange * stateMachine.AttackRange;
     }
 

@@ -9,15 +9,29 @@ public class Health : MonoBehaviour
 
 
     private int health;
+    private bool isInvulnerable = false;
+
+    public bool IsDead => health == 0;
 
     private void Start()
     {
         health = maxHealth;
     }
 
+    public void SetInvulnerable(bool isInvulnerable)
+    {
+        this.isInvulnerable = isInvulnerable;
+    }
+
+
     public void DealDamage(int damage)
     {
         if (health == 0)
+        {
+            return;
+        }
+
+        if (isInvulnerable)
         {
             return;
         }

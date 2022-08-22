@@ -1901,6 +1901,9 @@ MonoBehaviour:
   <Weapon>k__BackingField: {fileID: 6180130588441946538}
   <Health>k__BackingField: {fileID: 5421250816033352125}
   <Ragdoll>k__BackingField: {fileID: 6784944489709793487}
+  <DodgeDuration>k__BackingField: 0.1
+  <DodgeLength>k__BackingField: 0.75
+  <DodgeCooldown>k__BackingField: 1
   <Attacks>k__BackingField:
   - <AnimationName>k__BackingField: Attack1
     <TransistionDuration>k__BackingField: 0.1
