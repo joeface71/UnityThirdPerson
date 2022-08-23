@@ -45,6 +45,9 @@ public class PlayerStateMachine : StateMachine
     public float DodgeCooldown { get; private set; }
 
     [field: SerializeField]
+    public float JumpForce { get; private set; }
+
+    [field: SerializeField]
     public Attack[] Attacks { get; private set; }
 
     public Transform MainCameraTransform { get; private set; }
