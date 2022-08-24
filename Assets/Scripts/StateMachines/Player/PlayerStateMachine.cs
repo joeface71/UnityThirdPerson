@@ -36,6 +36,9 @@ public class PlayerStateMachine : StateMachine
     public Ragdoll Ragdoll { get; private set; }
 
     [field: SerializeField]
+    public LedgeDetector LedgeDetector { get; private set; }
+
+    [field: SerializeField]
     public float DodgeDuration { get; private set; }
 
     [field: SerializeField]
