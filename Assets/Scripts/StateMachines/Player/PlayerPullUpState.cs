@@ -6,6 +6,8 @@ public class PlayerPullUpState : PlayerBaseState
 
     private const float CrossFadeDuration = 0.1f;
 
+    private readonly Vector3 offset = new Vector3(0f, 2.325f, 0.65f);
+
     public PlayerPullUpState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
     }
@@ -22,7 +24,11 @@ public class PlayerPullUpState : PlayerBaseState
             return;
         }
 
-        stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
+        stateMachine.Controller.enabled = false;
+        stateMachine.transform.Translate(offset, Space.Self);
+        stateMachine.Controller.enabled = true;
+
+        stateMachine.SwitchState(new PlayerFreeLookState(stateMachine, false));
     }
 
     public override void Exit()
